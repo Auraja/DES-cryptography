@@ -50,10 +50,10 @@ def main():
         st.stop()
 
     pilihan = st.selectbox("Pilih opsi kriptografi : ", ["Enkripsi", "Dekripsi"])
-    st.write(f"Opsi yang dipilih: {pilihan}")
+    st.warning(f"Opsi yang dipilih: {pilihan}")
 
-    if pilihan == "Enkripsi" or pilihan == "Dekripsi":
-        message = st.text_area(f"Enter text to {pilihan.lower()}:")
+    if pilihan == "Enkripsi":
+        message = st.text_area(f"Masukkan kalimat untuk di{pilihan.lower()}:")
 
         if st.button(f"{pilihan}"):
             key_bytes = key.encode('utf-8')
@@ -61,14 +61,19 @@ def main():
             if pilihan == "Enkripsi":
                 result = des_encrypt(message, key_bytes)
                 st.success(f"{pilihan} successful:")
-                st.text(f"{pilihan} Text:")
+                st.text(f"Pesan {pilihan} :")
                 st.text(result)
+    else:
+        if st.button(f"{pilihan}"):
+            key_bytes = key.encode('utf-8')
 
-            elif pilihan == "Dekripsi":
+            if pilihan == "Dekripsi":
                 result = des_decrypt(message, key_bytes)
-                st.success(f"{pilihan}ion successful:")
-                st.text(f"{pilihan}ed Text:")
+                st.success(f"{pilihan} berhasil :")
+                st.text(f"Pesan {pilihan} :")
                 st.text(result)
+            
+
 
 if __name__ == "__main__":
     main()
