@@ -1,4 +1,6 @@
 import streamlit as st
+from Crypto.Cipher import DES
+from Crypto.Random import get_random_bytes
 
 def pad_message(message):
     while len(message) % 8 != 0:
@@ -17,21 +19,16 @@ def des_encrypt_block(block, key):
 def des_decrypt_block(block, key):
     return block
 
-def des_encrypt(plaintext, key):    
-    ciphertext = ""
-    for i in range(0, len(plaintext), 8):
-        block = initial_permutation(plaintext[i:i+8])
-        encrypted_block = des_encrypt_block(block, key)
-        ciphertext += final_permutation(encrypted_block)
-    return ciphertext
+def des_encrypt(key, message):
+    cipher = DES.new(key, DES.MODE_ECB)
+    padded_message = pad_message(message)
+    encrypted_message = cipher.encrypt(padded_message.encode('utf-8'))
+    return encrypted_message
 
-def des_decrypt(ciphertext, key):
-    plaintext = ""
-    for i in range(0, len(ciphertext), 8):
-        block = initial_permutation(ciphertext[i:i+8])
-        decrypted_block = des_decrypt_block(block, key)
-        plaintext += final_permutation(decrypted_block)
-    return plaintext
+def des_decrypt(key, encrypted_message):
+    cipher = DES.new(key, DES.MODE_ECB)
+    decrypted_message = cipher.decrypt(encrypted_message).decode('utf-8').rstrip()
+    return decrypted_message
 
 def main():
     st.title("DES Encryption and Decryption")
@@ -60,7 +57,7 @@ def main():
 
             if pilihan == "Enkripsi":
                 result = des_encrypt(message, key_bytes)
-                st.success(f"{pilihan} successful:")
+                st.success(f"{pilihan} berhasil.")
                 st.text(f"Pesan {pilihan} :")
                 st.text(result)
     else:
@@ -68,12 +65,17 @@ def main():
             key_bytes = key.encode('utf-8')
 
             if pilihan == "Dekripsi":
-                result = des_decrypt(message, key_bytes)
-                st.success(f"{pilihan} berhasil :")
+                hasil = des_decrypt(message, key_bytes)
+                st.success(f"{pilihan} berhasil.")
                 st.text(f"Pesan {pilihan} :")
-                st.text(result)
+                st.text(hasil)
             
-
-
+    st.write("""## Projek Kelompok Kriptografi 7
+                    1. Hanifah Az-zahra        2210511046
+                    2. Dinda Cantika Putri     2210511054
+                    3. Ika Kusuma W.           2210511058
+                    4. Muhammad Alif Nadin     2210511067
+                    5. Derajat Salim W.        22105110??
+             """)
 if __name__ == "__main__":
     main()
