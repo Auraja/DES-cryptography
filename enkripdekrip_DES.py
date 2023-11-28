@@ -70,12 +70,8 @@ def main():
                 st.text(f"Pesan {pilihan} :")
                 st.text(hasil)
             
-    st.write("""## Projek Kelompok Kriptografi 7
-                    1. Hanifah Az-zahra        2210511046
-                    2. Dinda Cantika Putri     2210511054
-                    3. Ika Kusuma W.           2210511058
-                    4. Muhammad Alif Nadin     2210511067
-                    5. Derajat Salim W.        22105110??
+    st.write("""## Projek Kelompok 
+             
              """)
 if __name__ == "__main__":
     main()
