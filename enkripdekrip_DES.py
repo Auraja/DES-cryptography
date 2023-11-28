@@ -37,11 +37,11 @@ def main():
     st.title("DES Encryption and Decryption")
 
     st.markdown(
-            """
+            """ <h1 style='text-align: center;'>
             ## Data Encryption Standard (DES) 
             DES adalah salah satu dari contoh Algortima kriptografi modern.
-            DES Merupakan data dienkripsi dalam blok 64-bit menggunakan kunci internal 56-bit yang dibangkitkan dari kunci eksternal 64-bit. 
-            """
+            \nDES Merupakan data dienkripsi dalam blok 64-bit menggunakan kunci internal 56-bit yang dibangkitkan dari kunci eksternal 64-bit.<h1>
+            """, unsafe_allow_html=True
         )
 
     key = st.text_input("Enter 8-character key:")
@@ -49,8 +49,6 @@ def main():
     if len(key) != 8:
         st.warning("Masukkan kunci dengan maksimal 8 karakter (contoh : 00000000)")
         st.stop()
-
-    message = st.text_area("Enter message:")
 
     pilihan = st.selectbox("Pilih opsi", ["Enkripsi", "Dekripsi"])
     st.write(f"Opsi yang dipilih: {pilihan}")
@@ -63,8 +61,8 @@ def main():
 
             if pilihan == "Enkripsi":
                 result = des_encrypt(message, key_bytes)
-                st.success(f"{pilihan}ion successful:")
-                st.text(f"{pilihan}ed Text:")
+                st.success(f"{pilihan} successful:")
+                st.text(f"{pilihan} Text:")
                 st.text(result)
 
             elif pilihan == "Dekripsi":
