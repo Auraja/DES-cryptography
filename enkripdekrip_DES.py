@@ -1,26 +1,50 @@
 import streamlit as st
-from Crypto.Cipher import DES
-from Crypto.Random import get_random_bytes
 
 def pad_message(message):
-    # Pad the message with spaces to make its length a multiple of 8
     while len(message) % 8 != 0:
         message += ' '
     return message
 
-def des_encrypt(key, message):
-    cipher = DES.new(key, DES.MODE_ECB)
-    padded_message = pad_message(message)
-    encrypted_message = cipher.encrypt(padded_message.encode('utf-8'))
-    return encrypted_message
+def initial_permutation(block):
+    return block
 
-def des_decrypt(key, encrypted_message):
-    cipher = DES.new(key, DES.MODE_ECB)
-    decrypted_message = cipher.decrypt(encrypted_message).decode('utf-8').rstrip()
-    return decrypted_message
+def final_permutation(block):
+    return block
+
+def des_encrypt_block(block, key):
+    return block
+
+def des_decrypt_block(block, key):
+    return block
+
+def des_encrypt(plaintext, key):    
+    ciphertext = ""
+    for i in range(0, len(plaintext), 8):
+        block = initial_permutation(plaintext[i:i+8])
+        encrypted_block = des_encrypt_block(block, key)
+        ciphertext += final_permutation(encrypted_block)
+    return ciphertext
+
+def des_decrypt(ciphertext, key):
+    plaintext = ""
+    for i in range(0, len(ciphertext), 8):
+        block = initial_permutation(ciphertext[i:i+8])
+        decrypted_block = des_decrypt_block(block, key)
+        plaintext += final_permutation(decrypted_block)
+    return plaintext
 
 def main():
     st.title("DES Encryption and Decryption")
+
+
+    st.markdown(
+            """
+            ## Data Encryption Standard (DES)
+            DES is a symmetric-key algorithm for the encryption of electronic data. It operates on 64-bit blocks of data using a 56-bit key.
+            This example provides a simple, manual implementation of DES for educational purposes.
+            Note: This implementation is not secure for production use.
+            """
+        )
 
     key = st.text_input("Enter 8-character key:")
 
