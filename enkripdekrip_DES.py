@@ -36,40 +36,42 @@ def des_decrypt(ciphertext, key):
 def main():
     st.title("DES Encryption and Decryption")
 
-
     st.markdown(
             """
-            ## Data Encryption Standard (DES)
-            DES is a symmetric-key algorithm for the encryption of electronic data. It operates on 64-bit blocks of data using a 56-bit key.
-            This example provides a simple, manual implementation of DES for educational purposes.
-            Note: This implementation is not secure for production use.
+            ## Data Encryption Standard (DES) 
+            DES adalah salah satu dari contoh Algortima kriptografi modern.
+            DES Merupakan data dienkripsi dalam blok 64-bit menggunakan kunci internal 56-bit yang dibangkitkan dari kunci eksternal 64-bit. 
             """
         )
 
     key = st.text_input("Enter 8-character key:")
 
     if len(key) != 8:
-        st.warning("Please enter a valid 8-character key.")
+        st.warning("Masukkan kunci dengan maksimal 8 karakter (contoh : 00000000)")
         st.stop()
 
     message = st.text_area("Enter message:")
 
-    encrypt_button = st.button("Encrypt")
-    decrypt_button = st.button("Decrypt")
+    pilihan = st.selectbox("Pilih opsi", ["Enkripsi", "Dekripsi"])
+    st.write(f"Opsi yang dipilih: {pilihan}")
 
-    if encrypt_button:
-        key_bytes = key.encode('utf-8')
-        encrypted_message = des_encrypt(key_bytes, message)
-        st.success("Encryption successful:")
-        st.text("Encrypted Message:")
-        st.text(encrypted_message)
+    if pilihan == "Dekripsi" or pilihan == "Dekripsi":
+        message = st.text_area(f"Enter text to {pilihan.lower()}:")
 
-    if decrypt_button:
-        key_bytes = key.encode('utf-8')
-        decrypted_message = des_decrypt(key_bytes, message.encode('utf-8'))
-        st.success("Decryption successful:")
-        st.text("Decrypted Message:")
-        st.text(decrypted_message)
+        if st.button(f"{pilihan}"):
+            key_bytes = key.encode('utf-8')
+
+            if pilihan == "Enkripsi":
+                result = des_encrypt(message, key_bytes)
+                st.success(f"{pilihan}ion successful:")
+                st.text(f"{pilihan}ed Text:")
+                st.text(result)
+
+            elif pilihan == "Dekripsi":
+                result = des_decrypt(message, key_bytes)
+                st.success(f"{pilihan}ion successful:")
+                st.text(f"{pilihan}ed Text:")
+                st.text(result)
 
 if __name__ == "__main__":
     main()
