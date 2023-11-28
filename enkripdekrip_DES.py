@@ -37,10 +37,10 @@ def main():
     st.title("DES Encryption and Decryption")
 
     st.markdown(
-            """ <h2 style='text-align: center;'>
+            """
             DES adalah salah satu dari contoh Algortima kriptografi modern.
-            \nDES Merupakan data dienkripsi dalam blok 64-bit menggunakan kunci internal 56-bit yang dibangkitkan dari kunci eksternal 64-bit.<h2>
-            """,unsafe_allow_html=True
+            \nDES Merupakan data dienkripsi dalam blok 64-bit menggunakan kunci internal 56-bit yang dibangkitkan dari kunci eksternal 64-bit.
+            """
         )
 
     key = st.text_input("Enter 8-character key:")
