@@ -43,16 +43,16 @@ def main():
             """
         )
 
-    key = st.text_input("Enter 8-character key:")
+    key = st.text_input("Masukkan kunci 8 karakter:")
 
     if len(key) != 8:
         st.warning("Masukkan kunci dengan maksimal 8 karakter (contoh : 00000000)")
         st.stop()
 
-    pilihan = st.selectbox("Pilih opsi", ["Enkripsi", "Dekripsi"])
+    pilihan = st.selectbox("Pilih opsi kriptografi : ", ["Enkripsi", "Dekripsi"])
     st.write(f"Opsi yang dipilih: {pilihan}")
 
-    if pilihan == "Dekripsi" or pilihan == "Dekripsi":
+    if pilihan == "Enkripsi" or pilihan == "Dekripsi":
         message = st.text_area(f"Enter text to {pilihan.lower()}:")
 
         if st.button(f"{pilihan}"):
