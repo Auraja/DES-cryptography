@@ -1,52 +1,82 @@
 import streamlit as st
-from Crypto.Cipher import DES
+import DES
 from Crypto.Random import get_random_bytes
-from Crypto.Util.Padding import pad
+from Crypto.Util.Padding import pad, unpad
 
 def pad_message(message):
-    # Pad the message with spaces to make its length a multiple of 8
     while len(message) % 8 != 0:
         message += ' '
     return message
 
-#untuk mengenkripsi pesann
-def des_encrypt(key, message):
-    cipher = DES.new(key, DES.MODE_ECB)
-    padded_message = pad_message(message)
-    encrypted_message = cipher.encrypt(padded_message.encode('utf-8'))
-    return encrypted_message
+def generate_key(key):
+    return DES.new(key, DES.MODE_ECB)
 
-#untuk dekripsi pesan
-def des_decrypt(key, encrypted_message):
-    cipher = DES.new(key, DES.MODE_ECB)
-    decrypted_message = cipher.decrypt(encrypted_message).decode('utf-8').rstrip()
-    return decrypted_message
+def encrypt_message(text, cipher):
+    padded_text = pad_message(text)
+    encrypted_text = cipher.encrypt(padded_text.encode('utf-8'))
+    return encrypted_text
+
+def decrypt_message(encrypted_text, cipher):
+    decrypted_text = cipher.decrypt(encrypted_text)
+    return unpad(decrypted_text, 8).decode('utf-8')
 
 def main():
-    st.title("DES Encryption and Decryption")
+    st.title("🔑 ## DES Cryptography 🔑")
 
-    key = st.text_input("Enter 8-character key:")
+    with st.expander("Lebih lanjut mengenai DES!"):
+        st.markdown(
+            """
+            DES adalah salah satu dari contoh Algoritma kriptografi modern.
+            \nDES Merupakan data dienkripsi dalam blok 64-bit menggunakan kunci internal 56-bit yang dibangkitkan dari kunci eksternal 64-bit.
+            """
+        )
 
-    if len(key) != 8:
-        st.warning("Please enter a valid 8-character key.")
-        st.stop()
+    col1, col2 = st.columns(2)
 
-    message = st.text_area("Enter message:") #dindasukaroti
+    # Enkripsi pesan
+    with col1:
+        with st.form(key="encrypt"):
+            st.subheader(f"Masukkan kalimat untuk dienkripsi:")
+            key = st.text_input("Masukkan kunci 8 karakter:")
+            if len(key) != 8:
+                st.warning("Masukkan kunci dengan maksimal 8 karakter (contoh: 00000000)")
+                st.stop()
 
-    encrypt_button = st.button("Encrypt")
-    decrypt_button = st.button("Decrypt")
+            cipher = generate_key(key)
 
-    if encrypt_button:
-        key_bytes = key.encode('utf-8')
-        encrypted_message = des_encrypt(key_bytes, message)
-        st.success("Encryption successful:")
-        st.text(encrypted_message)
+        text = st.text_area("Enter a message")
+        submit = st.form_submit_button(label="Encrypt")
 
-    if decrypt_button:
-        key_bytes = key.encode('utf-8')
-        decrypted_message = des_decrypt(key_bytes, message.encode('utf-8'))
-        st.success("Decryption successful:")
-        st.text(decrypted_message)
+        if text == "":
+            st.warning("!!Kotak enkripsi pesan tidak boleh kosong!!")
+
+        if submit:
+            try:
+                encrypted_message = encrypt_message(text, cipher)
+                st.write("Encrypted message: ", encrypted_message.hex())
+            except:
+                st.warning("Message too large, please enter a smaller message or use a larger key.")
+
+    # Dekripsi pesan
+    with col2:
+        with st.form(key="decrypt"):
+            st.subheader("Decrypt a message")
+            encrypted_message_input = st.text_area("Enter encrypted message")
+            submit1 = st.form_submit_button(label="Decrypt")
+
+        if encrypted_message_input == "":
+            st.warning("Please enter a message to decrypt")
+
+        try:
+            if submit1:
+                decrypted_message = decrypt_message(bytes.fromhex(encrypted_message_input), cipher)
+                st.write("Decrypted message: ", decrypted_message)
+        except:
+            st.warning("Please enter a valid encrypted message.")
+
+    st.info("Setiap kali melakukan enkripsi, key akan digenerate secara otomatis. Silakan copy private key untuk melakukan dekripsi.")
+
+    st.write("Kelompok 7 DES Kriptografi © 2023")
 
 if __name__ == "__main__":
     main()
