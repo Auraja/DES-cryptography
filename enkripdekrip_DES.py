@@ -70,10 +70,10 @@ def main():
 
     st.write("""## Projek Kelompok 
             1. Hanifah Az-zahra
-            2. Dinda Cantika Putri
-            3. Ika Kusuma W.
-            4. M. Alif Nadin Putra      22105110
-            5. Derajat Salim Wibowo     22105110??
+        2. Dinda Cantika Putri
+        3. Ika Kusuma W.
+        4. M. Alif Nadin Putra      22105110
+        5. Derajat Salim Wibowo     22105110??
             """)
 
 if __name__ == "__main__":
