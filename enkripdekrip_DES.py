@@ -1,6 +1,7 @@
 import streamlit as st
-import DES
-import get_random_bytes
+from Crypto.Cipher import DES
+from Crypto.Random import get_random_bytes
+from Crypto.Util.Padding import pad
 
 def pad_message(message):
     # Pad the message with spaces to make its length a multiple of 8
@@ -8,12 +9,14 @@ def pad_message(message):
         message += ' '
     return message
 
+#untuk mengenkripsi pesann
 def des_encrypt(key, message):
     cipher = DES.new(key, DES.MODE_ECB)
     padded_message = pad_message(message)
     encrypted_message = cipher.encrypt(padded_message.encode('utf-8'))
     return encrypted_message
 
+#untuk dekripsi pesan
 def des_decrypt(key, encrypted_message):
     cipher = DES.new(key, DES.MODE_ECB)
     decrypted_message = cipher.decrypt(encrypted_message).decode('utf-8').rstrip()
@@ -28,7 +31,7 @@ def main():
         st.warning("Please enter a valid 8-character key.")
         st.stop()
 
-    message = st.text_area("Enter message:")
+    message = st.text_area("Enter message:") #dindasukaroti
 
     encrypt_button = st.button("Encrypt")
     decrypt_button = st.button("Decrypt")
