@@ -1,6 +1,6 @@
 import streamlit as st
-from Crypto.Cipher import DES
-from Crypto.Random import get_random_bytes
+import DES
+import get_random_bytes
 
 def pad_message(message):
     # Pad the message with spaces to make its length a multiple of 8
