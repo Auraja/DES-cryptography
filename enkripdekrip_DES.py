@@ -1,7 +1,5 @@
 import streamlit as st
 import DES
-from Crypto.Random import get_random_bytes
-from Crypto.Util.Padding import pad, unpad
 
 def pad_message(message):
     while len(message) % 8 != 0:
