@@ -19,16 +19,20 @@ def des_encrypt_block(block, key):
 def des_decrypt_block(block, key):
     return block
 
-def des_encrypt(key, message):
-    cipher = DES.new(key, DES.MODE_ECB)
-    padded_message = pad_message(message)
-    encrypted_message = cipher.encrypt(padded_message.encode('utf-8'))
-    return encrypted_message
+def des_encrypt(plaintext, key):
+    for i in range(0, len(plaintext), 8):
+        block = initial_permutation(plaintext[i:i+8])
+        encrypted_block = des_encrypt_block(block, key)
+        ciphertext += final_permutation(encrypted_block)
+    return ciphertext
 
-def des_decrypt(key, encrypted_message):
-    cipher = DES.new(key, DES.MODE_ECB)
-    decrypted_message = cipher.decrypt(encrypted_message).decode('utf-8').rstrip()
-    return decrypted_message
+def des_decrypt(ciphertext, key):
+    plaintext = ""
+    for i in range(0, len(ciphertext), 8):
+        block = initial_permutation(ciphertext[i:i+8])
+        decrypted_block = des_decrypt_block(block, key)
+        plaintext += final_permutation(decrypted_block)
+    return plaintext
 
 def main():
     st.title("DES Encryption and Decryption")
