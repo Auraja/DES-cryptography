@@ -18,8 +18,8 @@ Terakhir menjalankan file,
 streamlit run enkripdekrip_DES.py
 ```
 ### Projek Kelompok 7 Kriptografi
-1. Hanifah Az-zahra      22105110??
+1. Hanifah Az-zahra      2210511046
 2. Dinda Cantika Putri   2210511054
-3. Ika Kusuma W.         22105110??
+3. Ika Kusuma W.         2210511058
 4. M. Alif Nadin P.      2210511067
-5. Derajat Salim Wibowo  22105110??
+5. Derajat Salim Wibowo  2210511077
