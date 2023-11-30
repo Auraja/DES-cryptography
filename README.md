@@ -17,7 +17,7 @@ Terakhir menjalankan file,
 ```bash
 streamlit run dashboard-rsa.py
 ```
-### Project Kelompok 
+### Projek Kelompok 7 Kriptografi
 1. Hanifah Az-zahra      22105110??
 2. Dinda Cantika Putri   2210511054
 3. Ika Kusuma W.         22105110??
