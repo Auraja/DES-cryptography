@@ -15,7 +15,7 @@ Lakukan `clone` atau download repositori ini.
 Terakhir menjalankan file, 
 
 ```bash
-streamlit run dashboard-rsa.py
+streamlit run enkripdekrip_DES.py
 ```
 ### Projek Kelompok 7 Kriptografi
 1. Hanifah Az-zahra      22105110??
