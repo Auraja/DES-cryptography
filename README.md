@@ -18,8 +18,8 @@ Terakhir menjalankan file,
 streamlit run dashboard-rsa.py
 ```
 ### Project Kelompok 
-1. Hanifah Az-zahra
-2. Dinda Cantika Putri
-3. Ika Kusuma W.
-4. M. Alif Nadin P.
-5. Derajat Salim Wibowo
+1. Hanifah Az-zahra      22105110??
+2. Dinda Cantika Putri   2210511054
+3. Ika Kusuma W.         22105110??
+4. M. Alif Nadin P.      2210511067
+5. Derajat Salim Wibowo  22105110??
