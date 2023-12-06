@@ -25,7 +25,8 @@ def main():
         st.markdown(
             """
             DES adalah salah satu dari contoh Algoritma kriptografi modern.
-            \nDES Merupakan data dienkripsi dalam blok 64-bit menggunakan kunci internal 56-bit yang dibangkitkan dari kunci eksternal 64-bit.
+            \nDES Merupakan data dienkripsi dalam blok 64-bit menggunakan kunci internal 56-bit 
+            yang dibangkitkan dari kunci eksternal 64-bit.
             """
         )
 
